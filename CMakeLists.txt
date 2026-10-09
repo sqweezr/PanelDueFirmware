@@ -239,8 +239,8 @@ add_custom_command( OUTPUT paneldue.bin
 	COMMAND arm-none-eabi-objcopy -O binary paneldue.elf paneldue.bin
 )
 add_custom_command( OUTPUT paneldue-logo.bin
-	DEPENDS paneldue.bin ${PROJECT_SOURCE_DIR}/SplashScreens/SplashScreen-Duet3D-800x480.bin
-	COMMAND cat paneldue.bin ${PROJECT_SOURCE_DIR}/SplashScreens/SplashScreen-Duet3D-800x480.bin > paneldue-logo.bin
+    DEPENDS paneldue.bin ${PROJECT_SOURCE_DIR}/SplashScreens/SplashScreen-Duet3D-480x272.bin
+    COMMAND cat paneldue.bin ${PROJECT_SOURCE_DIR}/SplashScreens/SplashScreen-Duet3D-480x272.bin > paneldue-logo.bin
 )
 
 add_custom_target( bin ALL
