@@ -19,10 +19,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc-arm-none-eabi cmake ninja-build
 
-      - name: Configure and Build
+      - name: Configure and Build Firmware
         run: |
-          cmake -B build -G "Ninja" -DDEVICE=v3-4.3
-          cmake --build build
+          cmake -B build -DDEVICE="v3-4.3" .
+          make -C build all
 
       - name: Upload Binary Artifacts
         if: always()
