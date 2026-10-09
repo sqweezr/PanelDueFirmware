@@ -21,7 +21,7 @@ jobs:
 
       - name: Configure and Build
         run: |
-          cmake -B build -G "Ninja"
+          cmake -B build -G "Ninja" -DDEVICE=v3-4.3
           cmake --build build
 
       - name: Upload Binary Artifacts
