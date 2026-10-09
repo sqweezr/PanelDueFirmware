@@ -1,0 +1,30 @@
+name: Build PanelDue Firmware
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install ARM Compiler & Make
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi make
+
+      - name: Compile Firmware
+        run: |
+          make -j$(nproc) || make
+
+      - name: Upload Binary Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PanelDueFirmware-Binaries
+          path: |
+            *.bin
+            **/*.bin
