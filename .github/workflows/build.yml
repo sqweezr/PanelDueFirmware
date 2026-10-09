@@ -21,6 +21,7 @@ jobs:
 
       - name: Configure and Build Firmware
         run: |
+          rm -rf build
           cmake -B build -DDEVICE="v3-4.3" .
           make -C build VERBOSE=1 all
 
