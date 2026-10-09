@@ -21,13 +21,14 @@ jobs:
 
       - name: Configure and Build Firmware
         run: |
-          cp env.cmake.example env.cmake
           rm -rf build
+          # Géén env.cmake gebruiken hier, vertrouw op de standaard compiler!
           cmake -B build -DDEVICE="v3-4.3" .
           make -C build VERBOSE=1 all
 
       - name: Append Custom Splash Screen
         run: |
+          # Dit voegt jouw 54KB logo samen met de correcte 149KB firmware
           cat build/paneldue.bin SplashScreens/SplashScreen-Duet3D-480x272.bin > build/PanelDueFirmware.bin
 
       - name: Upload Binary Artifacts
