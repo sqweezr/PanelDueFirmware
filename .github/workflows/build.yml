@@ -22,7 +22,11 @@ jobs:
       - name: Configure and Build Firmware
         run: |
           cmake -B build -DDEVICE="v3-4.3" .
-          make -C build all
+          make -C build VERBOSE=1 all
+
+      - name: Check Build Output Files
+        run: |
+          ls -la build/
 
       - name: Append Splash Screen
         run: |
