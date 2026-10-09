@@ -11,20 +11,24 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-      - name: Install ARM Compiler & Make
+      - name: Install ARM Compiler & CMake
         run: |
           sudo apt-get update
-          sudo apt-get install -y gcc-arm-none-eabi make
+          sudo apt-get install -y gcc-arm-none-eabi cmake ninja-build
 
-      - name: Compile Firmware
+      - name: Configure and Build
         run: |
-          make -j$(nproc) || make
+          cmake -B build -G "Ninja"
+          cmake --build build
 
       - name: Upload Binary Artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: PanelDueFirmware-Binaries
           path: |
-            *.bin
+            build/*.bin
             **/*.bin
