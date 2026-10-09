@@ -21,13 +21,14 @@ jobs:
 
       - name: Configure and Build Firmware
         run: |
+          cp env.cmake.example env.cmake
           rm -rf build
           cmake -B build -DDEVICE="v3-4.3" .
           make -C build VERBOSE=1 all
 
-      - name: Check Build Output Files
+      - name: Append Custom Splash Screen
         run: |
-          ls -la build/
+          cat build/paneldue.bin SplashScreens/SplashScreen-Duet3D-480x272.bin > build/PanelDueFirmware.bin
 
       - name: Upload Binary Artifacts
         if: always()
@@ -35,4 +36,4 @@ jobs:
         with:
           name: PanelDueFirmware-Binaries
           path: |
-            build/paneldue-logo.bin
+            build/PanelDueFirmware.bin
