@@ -29,14 +29,10 @@ jobs:
         run: |
           ls -la build/
 
-      - name: Append Splash Screen
-        run: |
-          cat build/paneldue.bin SplashScreens/SplashScreen-Duet3D-480x272.bin > build/PanelDueFirmware.bin
-
       - name: Upload Binary Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: PanelDueFirmware-Binaries
           path: |
-            build/PanelDueFirmware.bin
+            build/paneldue-logo.bin
